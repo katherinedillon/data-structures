@@ -13,6 +13,7 @@ public class LinkedListStack
     public LinkedListStack()
     {
         first = null;
+        //test if changes can be made
     }
 
     /**
