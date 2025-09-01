@@ -14,8 +14,8 @@ public class ReverseTester
         employeeNames.addLast("Romeo");
         employeeNames.addLast("Tom");
 
-        ListUtil.reverse(employeeNames);
-        System.out.println(employeeNames);
+
+        System.out.println(ListUtil.reverse(employeeNames));
         System.out.println("Expected: [Tom, Romeo, Harry, Dick]");
     }
 }

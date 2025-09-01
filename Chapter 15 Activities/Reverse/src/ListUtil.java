@@ -11,12 +11,12 @@ public class ListUtil
      *
      * @param strings the linked list to reverse
     */
-    public static void reverse(LinkedList<String> strings) //strings.size() is a valid statement
+    public static LinkedList<String> reverse(LinkedList<String> strings) //strings.size() is a valid statement
     {
         ListIterator<String> iterator = strings.listIterator();
 
         LinkedList<String> reversed = new LinkedList<>();
-        
+
         while (iterator.hasNext())
         {
            iterator.next();
@@ -26,16 +26,11 @@ public class ListUtil
         while (count < strings.size())
         {
             count++;
-            iterator.previous();
-            String n = iterator.next();
-            
+            String n = iterator.previous();
+
             reversed.add(n);
-            System.out.println(reversed);
-
         }
-        
-        strings = reversed;
-
-
+        return reversed;
     }
+
 }
