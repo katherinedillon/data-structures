@@ -13,28 +13,26 @@ public class ListUtil
     */
     public static void reverse(LinkedList<String> strings) //strings.size() is a valid statement
     {
-        ListIterator<String> iterator = strings.listIterator();
-
-        LinkedList<String> reversed = new LinkedList<>();
+        ListIterator<String> iterator1 = strings.listIterator();
+        ListIterator<String> iterator2 = strings.listIterator();
         
-        while (iterator.hasNext())
+        
+        while (iterator2.hasNext())
         {
-           iterator.next();
+           iterator2.next();
         }
 
         int count=0;
-        while (count < strings.size())
+        while (count < strings.size() / 2)
         {
             count++;
-            iterator.previous();
-            String n = iterator.next();
-            
-            reversed.add(n);
-            System.out.println(reversed);
+            String x = iterator2.previous();
+            String y = iterator1.next();
+
 
         }
+        System.out.println(strings);
         
-        strings = reversed;
 
 
     }
