@@ -27,10 +27,12 @@ public class ListUtil
         while (count < strings.size() / 2)
         {
             count++;
+            String x = iterator1.next();
+            String y = iterator2.previous();
 
-            String x = iterator2.previous();
-            String y = iterator1.next();
 
+            iterator1.set(y);
+            iterator2.set(x);
 
         }
         System.out.println(strings);
