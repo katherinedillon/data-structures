@@ -35,14 +35,32 @@ public class SudokuSolver {
             System.out.println("Cannot open: " + fileName);
         }
 
-        // create the list of sets for each row (this.rows)
-        // ...
         this.rows = new ArrayList<Set<Integer>>();
-
-        // create the list of sets for each col (this.cols)
-        // ...
         this.cols = new ArrayList<Set<Integer>>();
 
+        // create the list of sets for each row (this.rows)
+        // ...
+        //rows = <Set<Integer>>
+        for (int r=0; r<9; r++)
+        {
+            Set<Integer> row = new HashSet<>();
+            for (int c=0; c<9; c++)
+            {
+                row.add(grid[r][c]);
+            }
+            rows.add(row);
+        }
+        // create the list of sets for each col (this.cols)
+        // ...
+        for (int r=0; r<9; r++)
+        {
+            Set<Integer> col = new HashSet<>();
+            for (int c=0; c<9; c++)
+            {
+                col.add(grid[c][r]);
+            }
+            cols.add(col);
+        }
         // create the list of sets for each square (this.squares)
         /* the squares are added to the list row-by-row:
             0 1 2
@@ -50,23 +68,118 @@ public class SudokuSolver {
             6 7 8
          */
         // ...
-        this.squares = new ArrayList<Set<Integer>>();
-        int startRow=0;
-        int startCol=0;
-        for (int square = 0; square < N; square++)
+        /* 
+        for (int r=0; r<3; r++)
         {
-            Set<Integer> set = new HashSet<Integer>();
-            for (int row=startRow; row<startRow + M; row++){
-                for (int col=startCol; col<startCol + M; col++){
-                    if (this.grid[row][col]!=0){
-                        set.add(this.grid[row][col]);
-                    }
-                }
+            Set<Integer> square = new HashSet<>();
+            for (int c=0; c<3; c++)
+            {
+                square.add(grid[r][c]);
             }
+            squares.add(square);
         }
+        for (int r=0; r<3; r++)
+        {
+            Set<Integer> square = new HashSet<>();
+            for (int c=3; c<6; c++)
+            {
+                square.add(grid[r][c]);
+            }
+            squares.add(square);
+        }
+        for (int r=0; r<3; r++)
+        {
+            Set<Integer> square = new HashSet<>();
+            for (int c=6; c<9; c++)
+            {
+                square.add(grid[r][c]);
+            }
+            squares.add(square);
+        }
+
+
+        for (int r=3; r<6; r++)
+        {
+            Set<Integer> square = new HashSet<>();
+            for (int c=0; c<3; c++)
+            {
+                square.add(grid[r][c]);
+            }
+            squares.add(square);
+        }
+        for (int r=3; r<6; r++)
+        {
+            Set<Integer> square = new HashSet<>();
+            for (int c=3; c<6; c++)
+            {
+                square.add(grid[r][c]);
+            }
+            squares.add(square);
+        }
+        for (int r=3; r<6; r++)
+        {
+            Set<Integer> square = new HashSet<>();
+            for (int c=6; c<9; c++)
+            {
+                square.add(grid[r][c]);
+            }
+            squares.add(square);
+        }
+
+        for (int r=6; r<9; r++)
+        {
+            Set<Integer> square = new HashSet<>();
+            for (int c=0; c<3; c++)
+            {
+                square.add(grid[r][c]);
+            }
+            squares.add(square);
+        }
+        for (int r=6; r<9; r++)
+        {
+            Set<Integer> square = new HashSet<>();
+            for (int c=3; c<6; c++)
+            {
+                square.add(grid[r][c]);
+            }
+            squares.add(square);
+        }
+        for (int r=6; r<9; r++)
+        {
+            Set<Integer> square = new HashSet<>();
+            for (int c=6; c<9; c++)
+            {
+                square.add(grid[r][c]);
+            }
+            squares.add(square);
+        }
+*/
+
+        
+         this.squares = new ArrayList<Set<Integer>>();
+          int startRow = 0;
+          int startCol = 0;
+          for (int square = 0; square < N; square++)
+          {
+               Set<Integer> set = new HashSet<Integer>();
+               for (int row=startRow; row<startRow + M; row++)
+               {
+                   for (int col=startCol; col<startCol + M; col++)
+                  {
+                       if (this.grid[row][col]!=0)
+                           set.add(this.grid[row][col]);
+                   }
+               }
+          }
+         
 
         // create a hash set for [1..9] (this.nums)
         // ...
+        Set<Integer> nums = new HashSet<>();
+        for (int i = 1; i<=9; i++)
+        {
+            nums.add(i);
+        }
 
         // visually inspect that all the sets are correct
         for (int row = 0; row < N; row++) {
@@ -80,7 +193,7 @@ public class SudokuSolver {
         }
         System.out.println(this.nums);
     }
-
+ 
     public boolean solve() {
         // find an empty location, if any
         boolean finished = true;
@@ -110,8 +223,9 @@ public class SudokuSolver {
             Properly indexing the squares list of sets is tricky. Verify that your
             algorithm is correct.
          */
-        Set<Integer> possibleNums = new HashSet<Integer>();
-        possibleNums.addAll(this.nums);
+        Set<Integer> possibleNums = new HashSet<Integer>(this.nums);
+        possibleNums.removeAll(this.rows.get(nextRow));
+        possibleNums.removeAll(this.cols.get(nextCol));
         
         // ...
 
@@ -157,8 +271,7 @@ public class SudokuSolver {
     }
 
     public static void main(String[] args) {
-        String fileName = "src/puzzle1.txt";
-
+        String fileName = "Chapter 15 Activities/Sudoku/src/puzzle1.txt";
         SudokuSolver solver = new SudokuSolver(fileName);
         System.out.println(solver);
         if (solver.solve()) {

@@ -17,9 +17,8 @@ public class StringLengthMap
         try (Scanner in = new Scanner(new File(filename)))
         {
 
-            // Create your map here
+            Map <Integer, String> listWords = new HashMap<>();
             
-
             while (in.hasNext())
             {
                 String word = clean(in.next());
