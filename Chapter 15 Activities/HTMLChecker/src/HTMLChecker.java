@@ -22,15 +22,16 @@ public class HTMLChecker
         try (Scanner in = new Scanner(new File(filename)))
         {
             Stack<String> theStack = new Stack<String>();
-            // Your code goes here
+            
             while (in.hasNext()){
                 String value = in.next();
                 System.out.print(value);
+
                 if (!value.contains("/"))
-                    theStack.push(value);
+                    theStack.push(value); //adds to the stack
                 else{
                     String currentVal = theStack.pop();
-                    //value.eq
+                    
                 }
             }
 
