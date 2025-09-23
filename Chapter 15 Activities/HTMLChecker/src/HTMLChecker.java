@@ -25,22 +25,66 @@ public class HTMLChecker
             
             while (in.hasNext()){
                 String value = in.next();
-                System.out.print(value);
+                System.out.println("Tag: " + value);
 
-                if (!value.contains("/"))
-                    theStack.push(value); //adds to the stack
-                else{
-                    String currentVal = theStack.pop();
-                    
+                if (isOpeningTag(value))
+                {
+                    theStack.push(getTagName(value));
+                }
+                else if (isClosingTag(value))
+                {
+                    if (theStack.isEmpty())
+                    {
+                        System.out.println("Closing tag with no matching opening tag");
+                        return;
+                    }
+
+                    String expected = theStack.pop();
+                    String actual = getTagName(value);
+
+                    if (!expected.equals(actual))
+                    {
+                        System.out.println("Error");
+                        return;
+                    }
+                }
+                else
+                {
+                    System.out.println("Invalid: " + value);
                 }
             }
 
+            if (theStack.isEmpty())
+            {
+                System.out.println("Success!");
+            }
+            else
+            {
+                System.out.println("There are unmatched open tags" + theStack);
+            }
 
-
-        } catch (FileNotFoundException e)
+        }
+        catch (FileNotFoundException e)
         {
             System.out.println("Cannot open: " + filename);
         }
+    }
 
+    private static boolean isOpeningTag(String tag)
+    {
+        return tag.startsWith("<") && !tag.startsWith("</") && tag.endsWith(">");
+    }
+
+    // Helper to check if it's a closing tag
+    private static boolean isClosingTag(String tag)
+    {
+        return tag.startsWith("</") && tag.endsWith(">");
+    }
+
+    // Extracts tag name without angle brackets and slash
+    private static String getTagName(String tag)
+    {
+        return tag.replaceAll("[</>]", "");
     }
 }
+
