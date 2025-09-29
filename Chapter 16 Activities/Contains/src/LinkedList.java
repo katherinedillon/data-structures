@@ -41,7 +41,14 @@ public class LinkedList
     */
     public boolean contains(Object obj)
     {
-        // ...
+        LinkedListIterator iterator = new LinkedListIterator();
+        while (iterator.hasNext())
+        {
+            Object element = iterator.next();
+            if (element.equals(obj))
+                return true;
+        }
+        return false;
     }
 
     /**
