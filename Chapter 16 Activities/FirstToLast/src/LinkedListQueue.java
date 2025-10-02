@@ -23,8 +23,13 @@ public class LinkedListQueue
     */
     public void firstToLast()
     {
-        . . .
-
+        if (head == null || head.next == null) //checks to see if the list is empty or only has one element
+            return;
+        Node first = head;
+        head = head.next;
+        first.next = null;
+        tail.next = first;
+        tail = first;
 
 
     }

@@ -22,11 +22,16 @@ public class LinkedListQueue
     */
     public void lastToFirst()
     {
-        . . .
-
-
-
-
+        if (head == null || head.next == null)
+            return; //will stop if the queue is empty or only has one element
+        Node currentNode = head;
+        while (currentNode.next != tail){
+            currentNode = currentNode.next;
+        }
+        currentNode.next = null;
+        tail.next = head;
+        head = tail;
+        tail = currentNode;
 
     }
 
