@@ -63,5 +63,22 @@ public class Tree
         else { return root.size(); }
     }
 
+    // Write a method that counts the number of leaves in a tree. Implement the leafCount method in the Tree class and test your implementation with the TreeTester class
+    public int leafCountHelper(Node node) {
+        if (node.children.size() == 0) {
+            return 1;
+        }
+        int leafCount = 0;
+        for (Node child : node.children) {
+            leafCount += leafCountHelper(child);
+        }
+        return leafCount;
+    }
     // Additional methods will be added in later sections.
+    public int leafCount() {
+        if (root == null) {
+            return 0;
+        }
+        return leafCountHelper(root);
+    }
 }
