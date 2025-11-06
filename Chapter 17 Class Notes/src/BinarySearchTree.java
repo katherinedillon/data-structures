@@ -140,7 +140,9 @@ public class BinarySearchTree
     */
     public void print()
     {   
-        
+        // Print the tree using in-order traversal
+        print(this.root);
+        System.out.println();
     }   
 
     /**
@@ -149,7 +151,12 @@ public class BinarySearchTree
     */
     private static void print(Node parent)
     {   
-        
+        if (parent == null) {
+            return;
+        }
+        print(parent.left);
+        System.out.println(parent.data + " ");
+        print(parent.right); 
     }
 
     /**
