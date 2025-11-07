@@ -13,5 +13,7 @@ public class TreeDemo
       Tree t4 = new Tree("Savannah");
       t2.addSubtree(t4);
       System.out.println("Size: " + t1.size());
+
+      System.out.println()
    }
 }
