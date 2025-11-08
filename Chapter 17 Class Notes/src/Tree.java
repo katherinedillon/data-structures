@@ -95,11 +95,12 @@ public class Tree
       }
 
       public void depthFirstHelper(Node node){
-        if (node.children.size() != 0) {
-            for (Node child: node.children) {
-                depthFirstHelper(child);
-        }
+        if (node == null) {
+            return;
       }
+        for (Node child: node.children) {
+            depthFirstHelper(child);
+          }
     }
 
       public static void postOrder(Node n, Visitor v)
